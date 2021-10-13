@@ -201,7 +201,7 @@ public class Bot extends TelegramLongPollingBot {
         }
         //  }
         //////////////////Сервисная часть для загрузки новых мемов,закомитить скобку сверху
-            // Вспомогательный массив с фото различных размеров от телеграма
+            // вспомогательный мАссив с фото разлИчных размеров от телеграМа
 //            List<PhotoSize> photos = update.getMessage().getPhoto();
 //            // Узнаем файл айди
 //            String f_id = photos.stream()
