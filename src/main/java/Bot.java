@@ -40,9 +40,10 @@ public class Bot extends TelegramLongPollingBot {
         log.debug("Receive new Update. updateID: " + update.getUpdateId());
         log.debug("Receive new Update. updateID: " + update.getUpdateId() + "new message" + update.getMessage());
         Long chatId = update.getMessage().getChatId();
-        /////////Сервисная часть для картинок   if(!(update.getMessage().hasPhoto())) {
+        /////////Сервисная часть для загрузки новых картинок   if(!(update.getMessage().hasPhoto())) {
+//Преобразуем апдейт в текст
         String inputText = update.getMessage().getText();
-
+//Сравниваем полученный текст с вариантамами ответа
         if (inputText.toLowerCase(Locale.ROOT).startsWith("/start") ||
                 inputText.toLowerCase(Locale.ROOT).startsWith("здарова") ||
                 inputText.toLowerCase(Locale.ROOT).startsWith("привет") ||
@@ -52,9 +53,9 @@ public class Bot extends TelegramLongPollingBot {
             CustomsetButtons(message, "Обзор", "Демонстрация");
             message.setChatId(chatId);
             message.setText
-                    (" Добрый день, вас приветствует бот для резюме\n" +
-                            " Управление в меню осуществляется кнопками снизу \n" +
-                            " Управление демонстрацией командами на русском языке во вкладке демонстрация\n");
+                    ("Добрый день, вас приветствует бот для резюме\n" +
+                            "Управление в меню осуществляется кнопками снизу \n" +
+                            "Управление демонстрацией - командами на русском языке,команды во вкладке демонстрация\n");
             try {
                 execute(message);
             } catch (TelegramApiException e) {
@@ -63,17 +64,17 @@ public class Bot extends TelegramLongPollingBot {
         }
         if (inputText.toLowerCase(Locale.ROOT).startsWith("демонстрация")) {
             SendMessage message = new SendMessage();
-            CustomsetButtons(message, "Сначала", "Сначала");
+            CustomsetButtons(message, "Демонстрация", "Сначала");
             message.setChatId(chatId);
-            message.setText(" Из функционала: \n" +
-                    " Разверни - реверс строки\n" +
-                    " Посчитай - Считает буквы\n" +
-                    " Разложи - подсчет каждого символа\n" +
-                    " Отправь мем - отправит мем\n" +
-                    " В результате демонстрации пробел так же считается в результате\n"+
-                    " Команды набираются на русском языке и не воспреимчивы к регистру, например: \n" +
-                    " Разверни 111222333444\n" +
-                    " РаЗвЕрНиПривет,как Дела");
+            message.setText("Из функционала: \n" +
+                    "Разверни - реверс строки\n" +
+                    "Посчитай - Считает буквы\n" +
+                    "Разложи - подсчет каждого символа\n" +
+                    "Отправь мем - отправит мем\n" +
+                    "В результате демонстрации пробел так же считается в результате\n"+
+                    "Команды набираются на русском языке и не воспреимчивы к регистру, например: \n" +
+                    "Разверни 111222333444\n" +
+                    "РаЗвЕрНиПривет,как Дела");
             try {
                 execute(message);
             } catch (TelegramApiException e) {
@@ -83,7 +84,7 @@ public class Bot extends TelegramLongPollingBot {
 
         if (inputText.toLowerCase(Locale.ROOT).startsWith("обзор")) {
             SendMessage message = new SendMessage();
-            CustomsetButtons(message, "В кратце про личные качества", "В кратце про навыки");
+            CustomsetButtons(message, "Вкратце про личные качества", "Вкратце про навыки");
             message.setChatId(chatId);
             message.setText("Два варианта на выбор:");
             try {
@@ -92,9 +93,9 @@ public class Bot extends TelegramLongPollingBot {
                 e.printStackTrace();
             }
         }
-        if (inputText.toLowerCase(Locale.ROOT).startsWith("в кратце про личные качества")) {
+        if (inputText.toLowerCase(Locale.ROOT).startsWith("вкратце про личные качества")) {
             SendMessage message = new SendMessage();
-            CustomsetButtons(message, "В кратце про навыки", "В кратце про навыки)");
+            CustomsetButtons(message, "Вкратце про навыки", "Вкратце про навыки)");
             message.setChatId(chatId);
             message.setText("Пунктуальность, ответственность, желание работать и развиваться");
             try {
@@ -104,12 +105,12 @@ public class Bot extends TelegramLongPollingBot {
             }
         }
 
-        if (inputText.toLowerCase(Locale.ROOT).startsWith("в кратце про навыки")) {
+        if (inputText.toLowerCase(Locale.ROOT).startsWith("вкратце про навыки")) {
             SendMessage message = new SendMessage();
-            CustomsetButtons(message, "В кратце про навыки", "Сначала");
+            CustomsetButtons(message, "Вкратце про навыки", "Сначала");
             message.setChatId(chatId);
             message.setText("Java junior, \n" +
-                    "коллекции: arraylist,linkedlist, hashmap.....\n" +
+                    "Коллекции: arraylist,linkedlist, hashmap.....\n" +
                     "Многопоточность: Нити, Thread, Runnuble\n" +
                     "Потоки ввода-вывода, input-output stream\n" +
                     "Интерфейсы \n" +
@@ -124,7 +125,7 @@ public class Bot extends TelegramLongPollingBot {
             }
         }
 
-//Разворот встроенными функциями
+//Разворот встроенными функциями(Стрингбилдер)
         if (inputText.toLowerCase(Locale.ROOT).startsWith("разверни")) {
             SendMessage message = new SendMessage();
             CustomsetButtons(message, "Демонстрация", "сначала");
@@ -141,7 +142,7 @@ public class Bot extends TelegramLongPollingBot {
             }
         }
 
-        //Посимвольный подсчет строки через встроенные функции
+        //Посимвольный подсчет строки через встроенные функции(Стригбилдер)
         if (inputText.toLowerCase(Locale.ROOT).startsWith("посчитай")) {
             SendMessage message = new SendMessage();
             CustomsetButtons(message, "Демонстрация", "сначала");
@@ -159,7 +160,7 @@ public class Bot extends TelegramLongPollingBot {
         }
 
 
-        //Посимвольное разложение через HASHMAP
+
         if (inputText.toLowerCase(Locale.ROOT).startsWith("разложи")) {
             SendMessage message = new SendMessage();
             CustomsetButtons(message, "Демонстрация", "сначала");
@@ -167,7 +168,7 @@ public class Bot extends TelegramLongPollingBot {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(inputText);
             String s = stringBuilder.delete(0, 7).toString();
-
+//Посимвольное разложение через HASHMAP
             char[] array = s.toCharArray();
             HashMap<Character, Integer> hashMap = new HashMap<>();
             for (int i = 0; i < array.length; i++) {
@@ -242,20 +243,20 @@ public class Bot extends TelegramLongPollingBot {
             replyKeyboardMarkup.setSelective(true);
             replyKeyboardMarkup.setResizeKeyboard(true);
             replyKeyboardMarkup.setOneTimeKeyboard(false);
-            // Создаем список строк клавиатуры
+            //Создаем список строк клавиатуры
             List<KeyboardRow> keyboard = new ArrayList<>();
-            // Первая строчка клавиатуры
+            //Первая строчка клавиатуры
             KeyboardRow keyboardFirstRow = new KeyboardRow();
-            // Добавляем кнопки в первую строчку клавиатуры
+            //Добавляем кнопки в первую строчку клавиатуры
             keyboardFirstRow.add(new KeyboardButton(knopka1));
-            // Вторая строчка клавиатуры
+            //Вторая строчка клавиатуры
             KeyboardRow keyboardSecondRow = new KeyboardRow();
-            // Добавляем кнопки во вторую строчку клавиатуры
+            //Добавляем кнопки во вторую строчку клавиатуры
             keyboardSecondRow.add(new KeyboardButton(knopka2));
-            // Добавляем все строчки клавиатуры в список
+            //Добавляем все строчки клавиатуры в список
             keyboard.add(keyboardFirstRow);
             keyboard.add(keyboardSecondRow);
-            // и устанваливаем этот список нашей клавиатуре
+            //Устанваливаем этот список нашей клавиатуре
             replyKeyboardMarkup.setKeyboard(keyboard);
         }
 
